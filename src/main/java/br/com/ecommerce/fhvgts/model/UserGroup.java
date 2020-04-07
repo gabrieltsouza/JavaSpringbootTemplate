@@ -6,25 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 
-@Document(collection="user")
+@Document("userGroup")
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-public class User {
+public class UserGroup {
     @Id
     private String id;
 
-    @Indexed(name = "userName")
+    @Indexed(name = "groupName")
+    @Getter
     @Setter
-    private String name;
-    @Setter
-    private String fullName;
+    private String groupName;
 
-    @Indexed(unique = true)
-    @Setter
-    private String fiscalDocument;
-
+    @DBRef
+    private List<User> users;
 }
